@@ -7,11 +7,8 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 
-import '../main/main_screen.dart';
-import '../map/filter_find_man_screen.dart';
-import '../map/location_frend_screen.dart';
-import '../map/main_location_screen.dart';
-
+import '../create_user/code/send_phone_code_screen.dart';
+//import '../create_user/code/block_input.dart';
 import 'cuntry_flag_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -341,7 +338,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     //builder: (context) => IPhone11ProX45(),
                                     //builder: (context) => IPhone11ProX46(),
                                     //builder: (context) => IPhone11ProX59(),
-                                    builder: (context) => IPhone11ProX72(),
+                                    builder: (context) => IPhone11ProX44(),
+                                    //builder: (context) => MyApp(),
+                                    //builder: (context) => BlockInput(),
                                   ));
                             },
                             shape: RoundedRectangleBorder(
