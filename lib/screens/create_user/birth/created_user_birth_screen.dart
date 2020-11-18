@@ -1,303 +1,162 @@
 import 'package:flutter/material.dart';
 
-class IPhone11ProX88 extends StatelessWidget {
+import 'package:responsive_flutter/responsive_flutter.dart';
+import 'package:jiffy/jiffy.dart';
+
+import 'package:qvins/screens/create_user/birth/text_field_birth.dart';
+import 'package:qvins/screens/create_user/gender/created_user_perfomance_screen.dart';
+
+class IPhone11ProX88 extends StatefulWidget {
   const IPhone11ProX88({Key key}) : super(key: key);
+
+  @override
+  _IPhone11ProX88State createState() => _IPhone11ProX88State();
+}
+
+class _IPhone11ProX88State extends State<IPhone11ProX88> {
+  String birthday;
+  bool colorTextError;
+  @override
+  void initState() {
+    super.initState();
+    birthday = '';
+    colorTextError = false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
       body: SizedBox(
-        width: 375.0,
-        height: 812.0,
+        width: MediaQuery.of(context).size.width, //375.0,
+        height: MediaQuery.of(context).size.height, //812.0,
         child: Column(
           children: <Widget>[
             // const IOSStatusBarBlack(),
-            Spacer(flex: 36),
-            Align(
-              alignment: Alignment(0.02, 0.0),
-              child: SizedBox(
-                width: 257.0,
-                height: 36.0,
-                child: Text(
-                  'Сколько Вам лет?',
-                  style: TextStyle(
+            Container(
+              height: MediaQuery.of(context).size.height * 0.044,
+            ), //Spacer(flex: 36),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8, //300.0,
+              height: MediaQuery.of(context).size.height * 0.044, //36.0,
+              child: Text(
+                'Сколько Вам лет?',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Display',
+                  fontSize:
+                      ResponsiveFlutter.of(context).fontSize(3.75), //30.0,
+                  color: const Color(0xFFFD4F6A),
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.014,
+            ), //Spacer(flex: 12),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8, //173.0,
+              height: MediaQuery.of(context).size.height * 0.03, //19.0,
+              child: Text(
+                'Укажите свой возраст',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Display',
+                  fontSize: ResponsiveFlutter.of(context).fontSize(2), //16.0,
+                  color: const Color(0xFFBABABA),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.049,
+            ), //Spacer(flex: 40),
+            //pin
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PinEntryTextField(
+                  context: context,
+                  fields: 8,
+                  fieldWidth: MediaQuery.of(context).size.width * 0.085, //32
+                  fieldHeight: MediaQuery.of(context).size.height * 0.044, //36
+                  margin: MediaQuery.of(context).size.width * 0.025,
+                  //padding: MediaQuery.of(context).size.height * 0.091,
+                  styleText: TextStyle(
                     fontFamily: 'SF Pro Display',
-                    fontSize: 30.0,
-                    color: const Color(0xFFFD4F6A),
+                    fontSize:
+                        ResponsiveFlutter.of(context).fontSize(3.75), //30.0,
+                    color: Colors.black,
                     fontWeight: FontWeight.w700,
+                    //height: 1,
                   ),
-                  textAlign: TextAlign.center,
+                  showFieldAsBox: false,
+                  onSubmit: (String dateBirth) {
+                    //print(dateBirth);
+                    var date_text = Jiffy(dateBirth).fromNow();
+                    //print(date_text);
+                    String date_num = date_text.replaceAll(" years ago", "");
+                    //print(date_num);
+                    setState(() {
+                      if (int.parse(date_num) < 18) {
+                        colorTextError = true;
+                        birthday =
+                            'Чтобы зарегистрироваться в Терри, нужно быть старше 18 лет';
+                      } else {
+                        colorTextError = false;
+                        birthday =
+                            'Ого, Вам уже больше 18! Давай к нам, мы подберем тебе идеального собеседника';
+                      }
+                    });
+                    if (dateBirth == '1111') {}
+                  }, // end onSubmit
+                ), // end PinEntryTextField()
+              ), // end Padding()
+            ),
+            //end
+            Container(
+              height: MediaQuery.of(context).size.height * 0.039,
+            ), //Spacer(flex: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.914, //343.0,
+              height: MediaQuery.of(context).size.height * 0.05, //34.0,
+              child: Text(
+                birthday,
+                //'Чтобы зарегистрироваться в Терри, нужно быть старше 18 лет',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Display',
+                  fontSize:
+                      ResponsiveFlutter.of(context).fontSize(1.75), //14.0,
+                  color: colorTextError ? Color(0xFFCF3C3C) : Color(0xFF3BC341),
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
-            Spacer(flex: 12),
-            Align(
-              alignment: Alignment(0.01, 0.0),
-              child: SizedBox(
-                width: 157.0,
-                height: 19.0,
-                child: Text(
-                  'Укажите свой возраст',
-                  style: TextStyle(
-                    fontFamily: 'SF Pro Display',
-                    fontSize: 16.0,
-                    color: const Color(0xFFBABABA),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            Spacer(flex: 24),
-            Align(
-              alignment: Alignment(0.07, 0.0),
-              child: Container(
-                // Group: Group 70
-                alignment: Alignment.center,
-                width: 344.05,
-                height: 64.0,
-                child: SizedBox(
-                  width: 344.05,
-                  height: 64.0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment(-0.32, 0.0),
-                        child: SizedBox(
-                          width: 344.05,
-                          height: 17.0,
-                          child: Row(
-                            children: <Widget>[
-                              Spacer(flex: 19),
-                              SizedBox(
-                                width: 33.0,
-                                height: 17.0,
-                                child: Text(
-                                  'День',
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Display',
-                                    fontSize: 14.0,
-                                    color: const Color(0xFF9C9C9C),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              Spacer(flex: 52),
-                              SizedBox(
-                                width: 43.0,
-                                height: 17.0,
-                                child: Text(
-                                  'Месяц',
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Display',
-                                    fontSize: 14.0,
-                                    color: const Color(0xFF9C9C9C),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              Spacer(flex: 70),
-                              SizedBox(
-                                width: 90.0,
-                                height: 17.0,
-                                child: Text(
-                                  'Год рождения',
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Display',
-                                    fontSize: 14.0,
-                                    color: const Color(0xFF9C9C9C),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              Spacer(flex: 37),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 344.05,
-                        height: 22.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 162.56,
-                              height: 22.0,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Align(
-                                    alignment: Alignment(-0.03, 0.0),
-                                    child: Container(
-                                      width: 6.0,
-                                      height: 1.0,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFFD4F6A),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 162.56,
-                                    height: 2.0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Container(
-                                          // Group: Group 67
-                                          alignment: Alignment.center,
-                                          width: 70.0,
-                                          height: 2.0,
-                                          child: SizedBox(
-                                            width: 70.0,
-                                            height: 2.0,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Container(
-                                                  width: 32.0,
-                                                  height: 2.0,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFBABABA),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 32.0,
-                                                  height: 2.0,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFBABABA),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          // Group: Group 68
-                                          alignment: Alignment.center,
-                                          width: 75.56,
-                                          height: 2.0,
-                                          child: SizedBox(
-                                            width: 75.56,
-                                            height: 2.0,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Container(
-                                                  width: 31.82,
-                                                  height: 2.0,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFBABABA),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 31.82,
-                                                  height: 2.0,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFBABABA),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                width: 6.0,
-                                height: 1.0,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFD4F6A),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                // Group: Group 69
-                                alignment: Alignment.center,
-                                width: 163.05,
-                                height: 2.0,
-                                child: SizedBox(
-                                  width: 163.05,
-                                  height: 2.0,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 31.82,
-                                        height: 2.0,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFBABABA),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 31.82,
-                                        height: 2.0,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFBABABA),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 31.82,
-                                        height: 2.0,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFBABABA),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 31.82,
-                                        height: 2.0,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFBABABA),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Spacer(flex: 74),
-            Align(
-              alignment: Alignment(0.03, 0.0),
-              child: Container(
-                // Group: Кнопка
-                alignment: Alignment.center,
-                width: 344.0,
-                height: 51.0,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 344.0,
-                  height: 51.0,
+            //Spacer(flex: 20),
+            //Spacer(flex: 74),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.039,
+            ), //Spacer(flex: 32),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.92, //344.0,
+              height: MediaQuery.of(context).size.height * 0.06, //51.0
+              //margin: EdgeInsets.only(top: 20, bottom: 20),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        //builder: (context) => IPhone11ProX45(),
+                        //builder: (context) => IPhone11ProX46(),
+                        //builder: (context) => IPhone11ProX59(),
+                        builder: (context) => IPhone11ProX118(),
+                        //builder: (context) => MyApp(),
+                        //builder: (context) => BlockInput(),
+                      ));
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                padding: EdgeInsets.all(0.0),
+                child: Ink(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.0),
                     gradient: LinearGradient(
@@ -309,17 +168,18 @@ class IPhone11ProX88 extends StatelessWidget {
                       ],
                     ),
                   ),
-                  child: SizedBox(
-                    width: 95.0,
-                    height: 37.0,
+                  child: Container(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.92,
+                        minHeight: MediaQuery.of(context).size.height * 0.043),
+                    alignment: Alignment.center,
                     child: Text(
                       'Продолжить',
                       style: TextStyle(
                         fontFamily: 'SF Pro Display',
-                        fontSize: 16.0,
+                        fontSize: ResponsiveFlutter.of(context).fontSize(2),
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        height: 2.31,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -327,22 +187,6 @@ class IPhone11ProX88 extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(flex: 439),
-            Container(
-              // Group: Home Indicator
-              alignment: Alignment.center,
-              width: 134.0,
-              height: 5.0,
-              child: Container(
-                width: 134.0,
-                height: 5.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100.0),
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Spacer(flex: 8),
           ],
         ),
       ),
