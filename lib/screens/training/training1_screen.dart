@@ -24,7 +24,8 @@ class IPhone11ProX73 extends StatelessWidget {
                   height: 929.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(''),
+                      image: AssetImage(
+                          'assets/images/AdobeStock_141748979 1.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
