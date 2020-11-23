@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qvins/screens/login/login_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'screens/splash_screen.dart';
+import 'MyModel.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,9 +11,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+    return ChangeNotifierProvider.value(
+      value: MyModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
     );
   }
 }

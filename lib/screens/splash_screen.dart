@@ -6,6 +6,7 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 
 import 'login/login_screen.dart';
 import 'login/pic_countri.dart';
+import 'package:qvins/screens/main/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -23,7 +24,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      //MaterialPageRoute(builder: (context) => LoginScreen()),
+      MaterialPageRoute(
+          builder: (context) => MainScreen(
+                SettingsSearchPeople: 0,
+              )),
       //MaterialPageRoute(builder: (context) => CountriPicer()),
     );
   }

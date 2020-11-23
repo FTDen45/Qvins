@@ -16,7 +16,8 @@ class TrainingHelp05 extends StatelessWidget {
           image: DecorationImage(
             image: AssetImage('assets/images/img/screen_training_05.jpg'),
             fit: BoxFit.fill,
-            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.45), BlendMode.darken ),
+            colorFilter: new ColorFilter.mode(
+                Colors.black.withOpacity(0.45), BlendMode.darken),
           ),
         ),
         width: MediaQuery.of(context).size.width, //375.0,
@@ -84,7 +85,9 @@ class TrainingHelp05 extends StatelessWidget {
                         //builder: (context) => IPhone11ProX45(),
                         //builder: (context) => IPhone11ProX46(),
                         //builder: (context) => IPhone11ProX59(),
-                        builder: (context) => IPhone11ProX45(),
+                        builder: (context) => MainScreen(
+                          SettingsSearchPeople: 0,
+                        ),
                         //builder: (context) => MyApp(),
                         //builder: (context) => BlockInput(),
                       ));

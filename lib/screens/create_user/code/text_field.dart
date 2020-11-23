@@ -44,7 +44,7 @@ class PinEntryTextField extends StatefulWidget {
 }
 
 class PinEntryTextFieldState extends State<PinEntryTextField> {
-  num _pin_nume;
+  List<String> _pin_nume;
   List<String> _pin;
   List<FocusNode> _focusNodes;
   List<TextEditingController> _textControllers;
@@ -54,7 +54,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
   @override
   void initState() {
     super.initState();
-    _pin_nume = 0;
+    _pin_nume = List<String>(0);
     _pin = List<String>(widget.fields);
     //print(_pin);
     _focusNodes = List<FocusNode>(widget.fields);
@@ -144,9 +144,9 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         onChanged: (String str) {
           setState(() {
             _pin[i] = str;
-            _pin_nume = _pin.length;
+            //_pin_nume = _pin.length;
           });
-          //print(_pin.length);
+
           if (i + 1 != widget.fields) {
             _focusNodes[i].unfocus();
             if (lastDigit != null && _pin[i] == '') {
