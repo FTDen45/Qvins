@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:qvins/widgets/widgetMainScreen.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,8 @@ import 'package:qvins/screens/training/training_05_screen.dart';
 import 'package:qvins/size_cofige.dart';
 import 'package:qvins/constans.dart';
 import 'package:qvins/MyModel.dart';
+
+import 'package:qvins/widgets/widgetMenuBottomPeopl.dart';
 
 class MainScreen extends StatefulWidget {
   final int SettingsSearchPeople;
@@ -45,8 +48,87 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  void _showWindow() {
+    showBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (builder) {
+        return Container(
+          width: getProportionateScreenWidth(375),
+          height: getProportionateScreenHeight(692),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text('Отзывы', style: TextStyle(color: Colors.black)),
+                  Text('Перейти в профиль'),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget _widgetScreensUsers(_selectedIndex, context, optionStyle) {
+      List<dynamic> _widgetOptions = [
+        Text(
+          'Index 1: Business',
+          style: optionStyle,
+        ),
+        Text(
+          'Index 2: School',
+          style: optionStyle,
+        ),
+        Text(
+          'Index 3: School',
+          style: optionStyle,
+        ),
+        Text(
+          'Index 4: School',
+          style: optionStyle,
+        ),
+      ];
+      return _widgetOptions.elementAt(_selectedIndex);
+    }
+
+    Widget _indexScrin(context, index, i) {
+      switch (index) {
+        case 0:
+          print('Мероприятия');
+
+          break;
+        case 1:
+          print('Люди рядом');
+          return widgetMenuBottomPeopl();
+          break;
+        case 2:
+          print('Главная');
+          if (i == 0) {
+            return PagesViewer(
+              showWindow: _showWindow,
+            );
+          } else {
+            return _widgetMainScreenSettingsSearchPeople(context);
+          }
+          break;
+        case 3:
+          print('Сообщения');
+          break;
+        case 4:
+          print('Профиль');
+          break;
+        default:
+          print('Нижнее меню');
+      }
+    }
+
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
@@ -57,7 +139,7 @@ class _MainScreenState extends State<MainScreen> {
           Stack(
         children: [
           Positioned(
-            bottom: 0,
+            bottom: getProportionateScreenHeight(83),
             top: 0,
             left: 0,
             right: 0,
@@ -481,56 +563,6 @@ _chooseAppBar(context, _selectedIndex, _numBar) {
 
         //Filled.svg
       );
-  }
-}
-
-_widgetScreensUsers(_selectedIndex, context, optionStyle) {
-  List<dynamic> _widgetOptions = [
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 4: School',
-      style: optionStyle,
-    ),
-  ];
-  return _widgetOptions.elementAt(_selectedIndex);
-}
-
-Widget _indexScrin(context, index, i) {
-  switch (index) {
-    case 0:
-      print('MONDAY');
-
-      break;
-    case 1:
-      print('TUESDAY');
-      break;
-    case 2:
-      print('WEDNESDAY');
-      if (i == 0) {
-        return _PagesViewer(context);
-      } else {
-        return _widgetMainScreenSettingsSearchPeople(context);
-      }
-      break;
-    case 3:
-      print('THURSDAY');
-      break;
-    case 4:
-      print('FRIDAY');
-      break;
-    default:
-      print('It\'s weekend');
   }
 }
 
@@ -973,395 +1005,31 @@ class _RangSliderAgeState extends State<RangSliderAge> {
   }
 }
 
-Widget _PagesViewer(BuildContext context) {
-  return Consumer<MyModel>(
-    builder: (context, page, child) => SizedBox(
-      width: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 3,
-            child: PageView.builder(
-              onPageChanged: (value) {
-                page.page2 = value;
-              },
-              itemCount: 3,
-              itemBuilder: (context, index) => _widgetMainScreen(
-                context,
-
-                text:
-                    'xxxxxxxxxxxxxxxxxxxx${index}', //splashData[index]['text'],
+class PagesViewer extends StatelessWidget {
+  PagesViewer({this.showWindow});
+  final Function showWindow;
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<MyModel>(
+      builder: (context, page, child) => SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: PageView.builder(
+                onPageChanged: (value) {
+                  page.page2 = value;
+                },
+                itemCount: 3,
+                itemBuilder: (context, index) => widgetMainScreen(
+                  BottomSheet: showWindow,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
-Widget _widgetMainScreen(BuildContext context, {String text}) {
-  return SizedBox(
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    child: SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.01, //8
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.92, //344
-            height: MediaQuery.of(context).size.height * 0.69, //560
-            child: Stack(children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                      "assets/images/img/widgetMainScreen_01.jpg",
-                    ),
-                  ),
-                ),
-                height: MediaQuery.of(context).size.height * 0.69, //560
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.69, //560
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(7)),
-                    gradient: LinearGradient(
-                        begin: FractionalOffset.topCenter,
-                        end: FractionalOffset.bottomCenter,
-                        colors: [
-                          Colors.grey.withOpacity(0.0),
-                          Colors.black,
-                        ],
-                        stops: [
-                          0.0,
-                          1.0
-                        ])),
-              ),
-              Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.055, //45,
-                left: MediaQuery.of(context).size.width * 0.043, //16
-                right: MediaQuery.of(context).size.width * 0.043, //16
-                child: Container(
-                  //color: Color(0xffff0000),
-                  height: MediaQuery.of(context).size.height * 0.25, //171,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width *
-                              0.832, //312.0,
-                          height: getProportionateScreenHeight(36.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Лейла',
-                                style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
-                                  fontSize: ResponsiveFlutter.of(context)
-                                      .fontSize(3.75), //30,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Container(
-                                width: getProportionateScreenWidth(8),
-                              ),
-                              Text(
-                                '18',
-                                style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
-                                  fontSize: ResponsiveFlutter.of(context)
-                                      .fontSize(2.75), //22,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Container(
-                                width: getProportionateScreenWidth(8),
-                              ),
-                              SizedBox(
-                                height: getProportionateScreenHeight(20.0),
-                                child: Align(
-                                  alignment: AlignmentDirectional.center,
-                                  child: SvgPicture.asset(
-                                    "assets/images/img/star.svg",
-                                    width: getProportionateScreenWidth(8),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: getProportionateScreenWidth(8),
-                              ),
-                              SizedBox(
-                                height: getProportionateScreenHeight(20.0),
-                                child: Align(
-                                  alignment: AlignmentDirectional.center,
-                                  child: Text(
-                                    '4.5',
-                                    style: TextStyle(
-                                      fontFamily: 'SF Pro Display',
-                                      fontSize: ResponsiveFlutter.of(context)
-                                          .fontSize(1.75), //14,
-                                      color: const Color(0xFFBABABA),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: getProportionateScreenHeight(6),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: getProportionateScreenWidth(8.0),
-                            height: getProportionateScreenWidth(8.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xff3BC341),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: getProportionateScreenWidth(6),
-                          ),
-                          Text(
-                            'Недавно была в сети',
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: ResponsiveFlutter.of(context)
-                                  .fontSize(1.5), //12.0,
-                              color: const Color(0xFFA3A3A3),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: getProportionateScreenHeight(4),
-                      ),
-                      SizedBox(
-                        width: getProportionateScreenWidth(312.0),
-                        height: getProportionateScreenHeight(57.0),
-                        child: Text(
-                          'Я тут для того, чтобы заводить новые знакомства. Рисую, много смеюсь и люблю гулять. Кто пойдет на концерт в Белгороде?',
-                          style: TextStyle(
-                            fontFamily: 'SF Pro Display',
-                            fontSize: ResponsiveFlutter.of(context)
-                                .fontSize(2.0), //16.0,
-                            color: const Color(0xFFE1E1E1),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: getProportionateScreenHeight(10),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xffFD4F6A),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(18),
-                              ),
-                            ),
-                            width: getProportionateScreenWidth(18.0),
-                            height: getProportionateScreenHeight(18.0),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.location,
-                                size: getProportionateScreenWidth(10.0),
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: getProportionateScreenWidth(6),
-                          ),
-                          Text(
-                            '2 км от Вас',
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: ResponsiveFlutter.of(context)
-                                  .fontSize(1.5), //12.0,
-                              color: const Color(0xFF909090),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: getProportionateScreenHeight(10),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xffFD4F6A),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(18),
-                              ),
-                            ),
-                            width: getProportionateScreenWidth(18.0),
-                            height: getProportionateScreenHeight(18.0),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.map,
-                                size: getProportionateScreenWidth(10.0),
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: getProportionateScreenWidth(6),
-                          ),
-                          Text(
-                            'Живет в Белгороде',
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: ResponsiveFlutter.of(context)
-                                  .fontSize(1.5), //12.0,
-                              color: const Color(0xFF909090),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: getProportionateScreenWidth(16),
-                right: getProportionateScreenHeight(16),
-                child: InkWell(
-                  onTap: () {
-                    print('!!!Отзывы!!!');
-                  },
-                  child: Container(
-                    width: getProportionateScreenWidth(62),
-                    height: getProportionateScreenHeight(14),
-                    //color: Color(0xffff0000),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Отзывы',
-                          style: TextStyle(
-                            fontFamily: 'SF Pro Display',
-                            fontSize: 12.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          width: getProportionateScreenWidth(0),
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: getProportionateScreenWidth(14),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ]),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: getProportionateScreenHeight(11)),
-            width: getProportionateScreenWidth(344),
-            height: getProportionateScreenHeight(44),
-            child: //Button next
-                Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: getProportionateScreenWidth(167),
-                  height: MediaQuery.of(context).size.height * 0.06,
-                  //margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: RaisedButton(
-                    elevation: 0,
-                    onPressed: () {
-                      print('!!!close!!!');
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
-                    padding: EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment(-1.0, 5.49),
-                          colors: [
-                            const Color(0xFFFF425F),
-                            const Color(0xFFFDA34F)
-                          ],
-                        ),
-                      ),
-                      child: Container(
-                          constraints: BoxConstraints(
-                              maxWidth: getProportionateScreenWidth(167),
-                              minHeight:
-                                  MediaQuery.of(context).size.height * 0.043),
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.close,
-                            size: getProportionateScreenWidth(22),
-                            color: Colors.white,
-                          )),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: getProportionateScreenWidth(167),
-                  height: MediaQuery.of(context).size.height * 0.06,
-                  //margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: RaisedButton(
-                    elevation: 0,
-                    onPressed: () {
-                      print('!!!like!!!');
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
-                    padding: EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        color: Color(0xff00E492),
-                      ),
-                      child: Container(
-                          constraints: BoxConstraints(
-                              maxWidth: getProportionateScreenWidth(167),
-                              minHeight:
-                                  MediaQuery.of(context).size.height * 0.043),
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.favorite,
-                            size: getProportionateScreenWidth(22),
-                            color: Colors.white,
-                          )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
+    );
+  }
 }

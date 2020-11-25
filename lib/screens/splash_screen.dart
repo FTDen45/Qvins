@@ -8,6 +8,8 @@ import 'login/login_screen.dart';
 import 'login/pic_countri.dart';
 import 'package:qvins/screens/main/main_screen.dart';
 
+import 'package:qvins/TestMyScreen/reviews_bottom_sheet.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
 
@@ -25,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.push(
       context,
       //MaterialPageRoute(builder: (context) => LoginScreen()),
+      //MaterialPageRoute(builder: (context) => MyHomePage()),
       MaterialPageRoute(
           builder: (context) => MainScreen(
                 SettingsSearchPeople: 0,
