@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qvins/widgets/widgetMainScreen.dart';
@@ -12,7 +13,9 @@ import 'package:qvins/size_cofige.dart';
 import 'package:qvins/constans.dart';
 import 'package:qvins/MyModel.dart';
 
+import 'package:qvins/widgets/widgetMenuBottomEvents.dart';
 import 'package:qvins/widgets/widgetMenuBottomPeopl.dart';
+import 'package:qvins/widgets/reviewsShowBottomSheet.dart';
 
 class MainScreen extends StatefulWidget {
   final int SettingsSearchPeople;
@@ -48,28 +51,16 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  void _showWindow() {
+  void _showWindow(context) {
     showBottomSheet(
+      //showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
       backgroundColor: Colors.white,
       context: context,
       builder: (builder) {
-        return Container(
-          width: getProportionateScreenWidth(375),
-          height: getProportionateScreenHeight(692),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text('Отзывы', style: TextStyle(color: Colors.black)),
-                  Text('Перейти в профиль'),
-                ],
-              ),
-            ],
-          ),
-        );
+        return reviewsShowBottomSheet();
       },
     );
   }
@@ -102,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
       switch (index) {
         case 0:
           print('Мероприятия');
-
+          return widgetMenuBottomEvents();
           break;
         case 1:
           print('Люди рядом');
@@ -434,6 +425,68 @@ enum _appBars {
 }
 _chooseAppBar(context, _selectedIndex, _numBar) {
   switch (_selectedIndex) {
+    case 0:
+      if (_numBar == 0) {
+        return AppBar(
+          toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+          elevation: 0,
+          centerTitle: true,
+          backgroundColor: Color(0xffffffff),
+          leadingWidth: MediaQuery.of(context).size.width * 0.19,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: SvgPicture.asset(
+                  'assets/images/img/shesterna.svg',
+                  width: MediaQuery.of(context).size.width * 0.08,
+                  height: MediaQuery.of(context).size.width * 0.08,
+                  fit: BoxFit.cover,
+                  color: Color(0xff674FFD),
+                ), //reload.svg
+                onPressed: () {
+                  print('!!!Reload!!!');
+                },
+              );
+            },
+          ),
+          title: SvgPicture.asset(
+            'assets/images/img/bg_logo_top/q.svg',
+            width: MediaQuery.of(context).size.width * 0.16,
+            //height: MediaQuery.of(context).size.width * 0.059,
+            color: Color(0xffFD4F6A),
+            //fit: BoxFit.cover,
+          ),
+          actions: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.19,
+              child: IconButton(
+                  padding: const EdgeInsets.all(18.0),
+                  //iconSize: 24.0,
+                  icon: SvgPicture.asset(
+                    'assets/images/img/loop.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    fit: BoxFit.cover,
+                    //color: Color(0xff),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!Filled.png!!!');
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => MainScreen(
+                    //         SettingsSearchPeople: 1,
+                    //       ),
+                    //     ));
+                  }
+                  //_numBar = 1;
+
+                  ),
+            ),
+          ], //Filled.svg
+        );
+      }
+      break;
     case 2:
       if (_numBar == 0) {
         return AppBar(
@@ -496,16 +549,18 @@ _chooseAppBar(context, _selectedIndex, _numBar) {
         );
       } else {
         return AppBar(
+          toolbarHeight: MediaQuery.of(context).size.width * 0.16,
           elevation: 0,
           centerTitle: true,
           backgroundColor: Color(0xffffffff),
+          leadingWidth: MediaQuery.of(context).size.width * 0.19,
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
                 icon: SvgPicture.asset(
                   'assets/images/img/arrow_back.svg',
-                  width: MediaQuery.of(context).size.width * 0.059,
-                  height: MediaQuery.of(context).size.width * 0.059,
+                  width: MediaQuery.of(context).size.width * 0.08,
+                  height: MediaQuery.of(context).size.width * 0.08,
                   color: Color(0xff674FFD),
                 ), //reload.svg
                 onPressed: () {
@@ -532,16 +587,20 @@ _chooseAppBar(context, _selectedIndex, _numBar) {
             textAlign: TextAlign.center,
           ),
           actions: [
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/images/img/check_gal.svg',
-                width: MediaQuery.of(context).size.width * 0.059,
-                height: MediaQuery.of(context).size.width * 0.059,
-                //color: Color(0xff),
-              ), //reload.svg
-              onPressed: () {
-                print('!!!check_gal.svg!!!');
-              },
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.19,
+              child: IconButton(
+                icon: SvgPicture.asset(
+                  'assets/images/img/check_gal.svg',
+                  width: MediaQuery.of(context).size.width * 0.08,
+                  height: MediaQuery.of(context).size.width * 0.08,
+                  fit: BoxFit.cover,
+                  //color: Color(0xff),
+                ), //reload.svg
+                onPressed: () {
+                  print('!!!check_gal.svg!!!');
+                },
+              ),
             ),
           ], //Filled.svg
         );
@@ -549,6 +608,7 @@ _chooseAppBar(context, _selectedIndex, _numBar) {
       break;
     default:
       return AppBar(
+        toolbarHeight: MediaQuery.of(context).size.width * 0.16,
         elevation: 0,
         centerTitle: true,
         backgroundColor: Color(0xffffffff),
@@ -607,8 +667,8 @@ Widget _widgetMainScreenSettingsSearchPeople(BuildContext context) {
                   Container(
                     width: getProportionateScreenWidth(311),
                     height: getProportionateScreenHeight(41),
-                    margin:
-                        EdgeInsets.only(top: getProportionateScreenHeight(10)),
+                    // margin:
+                    //     EdgeInsets.only(top: getProportionateScreenHeight(10)),
                     child: RaisedButton(
                       elevation: 0,
                       onPressed: () {
@@ -632,9 +692,10 @@ Widget _widgetMainScreenSettingsSearchPeople(BuildContext context) {
                         child: Container(
                           constraints: BoxConstraints(
                               maxWidth:
-                                  MediaQuery.of(context).size.width * 0.92,
+                                  getProportionateScreenWidth(311),
                               minHeight:
-                                  MediaQuery.of(context).size.height * 0.043),
+                                  getProportionateScreenHeight(41),
+                          ),
                           alignment: Alignment.center,
                           child: Text(
                             'Повысить подписку',

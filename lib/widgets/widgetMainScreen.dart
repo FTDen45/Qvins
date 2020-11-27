@@ -164,7 +164,7 @@ class widgetMainScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           width: getProportionateScreenWidth(312.0),
-                          height: getProportionateScreenHeight(57.0),
+                          height: getProportionateScreenHeight(70.0),
                           child: Text(
                             'Я тут для того, чтобы заводить новые знакомства. Рисую, много смеюсь и люблю гулять. Кто пойдет на концерт в Белгороде?',
                             style: TextStyle(
@@ -257,7 +257,7 @@ class widgetMainScreen extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       print('!!!Отзывы!!!');
-                      BottomSheet();
+                      BottomSheet(context);
                     },
                     child: Container(
                       width: getProportionateScreenWidth(62),
@@ -271,7 +271,7 @@ class widgetMainScreen extends StatelessWidget {
                             'Отзывы',
                             style: TextStyle(
                               fontFamily: 'SF Pro Display',
-                              fontSize: 12.0,
+                              fontSize: ResponsiveFlutter.of(context).fontSize(1.5), //12.0,
                               color: Colors.white,
                             ),
                           ),

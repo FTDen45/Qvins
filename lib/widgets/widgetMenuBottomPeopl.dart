@@ -21,10 +21,10 @@ class widgetMenuBottomPeopl extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: -60,
+            top: getProportionateScreenHeight(-60),
             left: getProportionateScreenWidth(375 / 2) -
                 getProportionateScreenWidth(92),
-            child: SvgPicture.asset('assets/images/img/PeopleLogo.svg'),
+            child: SvgPicture.asset('assets/images/img/PeopleLogo.svg',width:getProportionateScreenWidth(158),),
           ),
           SingleChildScrollView(
             child: Column(children: [

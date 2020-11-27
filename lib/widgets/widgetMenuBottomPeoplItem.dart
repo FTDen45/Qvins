@@ -35,6 +35,7 @@ class itemRowPeople extends StatelessWidget {
                         child: Image.asset(
                           imgpath,
                           fit: BoxFit.fill,
+                          width:getProportionateScreenWidth(82), 
                         ),
                       ),
                     ),
@@ -53,7 +54,7 @@ class itemRowPeople extends StatelessWidget {
                             Path,
                             style: TextStyle(
                               fontFamily: 'SF UI Text',
-                              fontSize: 10.0,
+                              fontSize: ResponsiveFlutter.of(context).fontSize(1.25), //10.0,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
@@ -69,6 +70,7 @@ class itemRowPeople extends StatelessWidget {
                       NameAge,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
+                        fontSize: ResponsiveFlutter.of(context).fontSize(1.5), //12.0,
                       ),
                     ),
                     Container(
@@ -105,6 +107,7 @@ class itemRowPeople extends StatelessWidget {
                         child: Image.asset(
                           imgpath,
                           fit: BoxFit.fill,
+                          width:getProportionateScreenWidth(82),
                         ),
                       ),
                     ),
@@ -123,7 +126,7 @@ class itemRowPeople extends StatelessWidget {
                             Path,
                             style: TextStyle(
                               fontFamily: 'SF UI Text',
-                              fontSize: 10.0,
+                              fontSize: ResponsiveFlutter.of(context).fontSize(1.25), //10.0,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
@@ -139,6 +142,7 @@ class itemRowPeople extends StatelessWidget {
                       NameAge,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
+                        fontSize: ResponsiveFlutter.of(context).fontSize(1.5), //12.0,
                       ),
                     ),
                     Container(
@@ -173,6 +177,7 @@ class itemRowPeople extends StatelessWidget {
                         child: Image.asset(
                           imgpath,
                           fit: BoxFit.fill,
+                          width:getProportionateScreenWidth(82),
                         ),
                       ),
                     ),
@@ -191,7 +196,7 @@ class itemRowPeople extends StatelessWidget {
                             Path,
                             style: TextStyle(
                               fontFamily: 'SF UI Text',
-                              fontSize: 10.0,
+                              fontSize: ResponsiveFlutter.of(context).fontSize(1.25), //10.0,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
@@ -207,6 +212,7 @@ class itemRowPeople extends StatelessWidget {
                       NameAge,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
+                        fontSize: ResponsiveFlutter.of(context).fontSize(1.5), //12.0,
                       ),
                     ),
                     Container(
