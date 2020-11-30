@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //MaterialPageRoute(builder: (context) => MyHomePage()),
       MaterialPageRoute(
           builder: (context) => MainScreen(
-                SettingsSearchPeople: 0,
+                SettingsSearchPeople: 0,selectedIndex: 2
               )),
       //MaterialPageRoute(builder: (context) => CountriPicer()),
     );
