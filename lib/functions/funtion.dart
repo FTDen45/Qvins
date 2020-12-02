@@ -212,6 +212,48 @@ class chooseAppBar extends PreferredSize {
               ),
             ], //Filled.svg
           );
+        } else if (_numBar == 3) {
+          return AppBar(
+            toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Color(0xffffffff),
+            leadingWidth: MediaQuery.of(context).size.width * 0.19,
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/images/img/arrow_back.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    color: Color(0xff674FFD),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!arrow_back.svg!!!');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainScreen(
+                            SettingsSearchPeople: 0,
+                            selectedIndex: 0,
+                          ),
+                        ));
+                  },
+                );
+              },
+            ),
+            title: Text(
+              'Фильм "Довод"',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.25), //18.0,
+                color: const Color(0xFF222222),
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            //Filled.svg
+          );
         }
         return AppBar(
           title: Text('zzzzzzzzzzzzzz'),
@@ -309,7 +351,7 @@ class chooseAppBar extends PreferredSize {
               },
             ),
             title: Text(
-              'zzzНастройки поиска людей',
+              'Настройки поиска людей',
               style: TextStyle(
                 fontFamily: 'SF Pro Display',
                 fontSize: ResponsiveFlutter.of(context).fontSize(2.25), //18.0,
@@ -335,6 +377,128 @@ class chooseAppBar extends PreferredSize {
                 ),
               ),
             ], //Filled.svg
+          );
+        }
+        break;
+      case 3:
+        if (_numBar == 0) {
+          return AppBar(
+            toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Color(0xffffffff),
+            leadingWidth: MediaQuery.of(context).size.width * 0.19,
+
+            title: SvgPicture.asset(
+              'assets/images/img/bg_logo_top/q.svg',
+              width: MediaQuery.of(context).size.width * 0.16,
+              //height: MediaQuery.of(context).size.width * 0.059,
+              color: Color(0xffFD4F6A),
+              //fit: BoxFit.cover,
+            ),
+            //Filled.svg
+          );
+        } else if (_numBar == 1) {
+          return AppBar(
+            toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Color(0xffffffff),
+            leadingWidth: MediaQuery.of(context).size.width * 0.19,
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/images/img/arrow_back.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    fit: BoxFit.cover,
+                    color: Color(0xffBABABA),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!Back!!!');
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
+            title: Row(
+              children: [
+                CircleAvatar(
+                  radius: getProportionateScreenWidth(14),
+                  //backgroundColor: Colors.black,
+                  backgroundImage:
+                      AssetImage('assets/images/img/message_avatar_02.jpg'
+                          // fit: BoxFit.fill,
+                          // width: getProportionateScreenWidth(50),
+                          ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  child: Text(
+                    'Валерия',
+                    style: TextStyle(
+                      fontFamily: 'SF UI Text',
+                      fontSize: 16.0,
+                      color: const Color(0xFF222222),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else if (_numBar == 2) {
+          return AppBar(
+            toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Color(0xffffffff),
+            leadingWidth: MediaQuery.of(context).size.width * 0.19,
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/images/img/arrow_back.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    fit: BoxFit.cover,
+                    color: Color(0xffBABABA),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!Back!!!');
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
+            title: Row(
+              children: [
+                CircleAvatar(
+                  radius: getProportionateScreenWidth(14),
+                  //backgroundColor: Colors.black,
+                  backgroundImage:
+                      AssetImage('assets/images/img/message_avatar_04.jpg'
+                          // fit: BoxFit.fill,
+                          // width: getProportionateScreenWidth(50),
+                          ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  child: Text(
+                    'Концерт Коржа',
+                    style: TextStyle(
+                      fontFamily: 'SF UI Text',
+                      fontSize: 16.0,
+                      color: const Color(0xFF222222),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         }
         break;

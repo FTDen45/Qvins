@@ -19,13 +19,21 @@ import 'package:qvins/widgets/widgetMenuBottomPeopl.dart';
 import 'package:qvins/widgets/reviewsShowBottomSheet.dart';
 import 'package:qvins/widgets/widgetMainScreenSettingsSearchPeople.dart';
 import 'package:qvins/widgets/widgetMainScreenSercheSearchEvents.dart';
+import 'package:qvins/widgets/widgetMainScreenItemSearchEvents.dart';
+import 'package:qvins/widgets/widgetMenuBottomMessages.dart';
+import 'package:qvins/widgets/widgetMenuBottomMessagesUserChat.dart';
+import 'package:qvins/widgets/widgetMenuBottomMessagesUserChatEvent.dart';
 
 import 'package:qvins/functions/funtion.dart';
 
 class MainScreen extends StatefulWidget {
   final int SettingsSearchPeople;
   final int selectedIndex;
-  MainScreen({this.SettingsSearchPeople, this.selectedIndex});
+  bool widgetMenuBottomMessagesUserChatBool;
+  MainScreen(
+      {this.SettingsSearchPeople,
+      this.selectedIndex,
+      this.widgetMenuBottomMessagesUserChatBool = true});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -128,6 +136,8 @@ class _MainScreenState extends State<MainScreen> {
             return widgetMainScreenSettingsSearchEvents(); //Events
           } else if (i == 2) {
             return widgetMainScreenSercheSearchEvents(); //Events
+          } else if (i == 3) {
+            return widgetMainScreenItemSearchEvents(); //Events
           }
           break;
         case 1:
@@ -147,6 +157,13 @@ class _MainScreenState extends State<MainScreen> {
           break;
         case 3:
           print('Сообщения');
+          if (i == 0) {
+            return widgetMenuBottomMessages();
+          } else if (i == 1) {
+            return widgetMenuBottomMessagesUserChat();
+          } else if (i == 2) {
+            return widgetMenuBottomMessagesUserChatEvent();
+          }
           break;
         case 4:
           print('Профиль');
@@ -165,7 +182,9 @@ class _MainScreenState extends State<MainScreen> {
           Stack(
         children: [
           Positioned(
-            bottom: getProportionateScreenHeight(83),
+            bottom: widget.widgetMenuBottomMessagesUserChatBool
+                ? getProportionateScreenHeight(83)
+                : 0,
             top: 0,
             left: 0,
             right: 0,
@@ -193,262 +212,266 @@ class _MainScreenState extends State<MainScreen> {
           //   child: _widgetScreensUsers(selectedIndex, context, optionStyle),
           // ),
           //_widgetScreensUsers(selectedIndex, context, optionStyle),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            width: MediaQuery.of(context).size.width,
-            child: Container(
-              color: Color(0xffffffff),
-              height: MediaQuery.of(context).size.height * 0.103,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        _onItemTapped(0, 0);
-                        meropriatie = true;
-                        people = false;
-                        main = false;
-                        message = false;
-                        profile = false;
-                      });
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.date_range,
-                              color: meropriatie
-                                  ? Color(0xffFD4F6A)
-                                  : Color(0xffBABABA),
-                              size: ResponsiveFlutter.of(context)
-                                  .fontSize(3.75), //30.0,
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height *
-                                  0.005, //4
-                            ),
-                            Text(
-                              'Мероприятия',
-                              style: TextStyle(
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.25), //10,
-                                color: meropriatie
-                                    ? Color(0xffFD4F6A)
-                                    : Color(0xffBABABA),
+          widget.widgetMenuBottomMessagesUserChatBool
+              ? Positioned(
+                  bottom: 0,
+                  left: 0,
+                  width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    color: Color(0xffffffff),
+                    height: MediaQuery.of(context).size.height * 0.103,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _onItemTapped(0, 0);
+                              meropriatie = true;
+                              people = false;
+                              main = false;
+                              message = false;
+                              profile = false;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.date_range,
+                                    color: meropriatie
+                                        ? Color(0xffFD4F6A)
+                                        : Color(0xffBABABA),
+                                    size: ResponsiveFlutter.of(context)
+                                        .fontSize(3.75), //30.0,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.005, //4
+                                  ),
+                                  Text(
+                                    'Мероприятия',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(1.25), //10,
+                                      color: meropriatie
+                                          ? Color(0xffFD4F6A)
+                                          : Color(0xffBABABA),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        _onItemTapped(1, 0);
-                        meropriatie = false;
-                        people = true;
-                        main = false;
-                        message = false;
-                        profile = false;
-                      });
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.location,
-                              color: people
-                                  ? Color(0xffFD4F6A)
-                                  : Color(0xffBABABA),
-                              size: ResponsiveFlutter.of(context)
-                                  .fontSize(3.75), //30.0,
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height *
-                                  0.005, //4
-                            ),
-                            Text(
-                              'Люди рядом',
-                              style: TextStyle(
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.25), //10,
-                                color: people
-                                    ? Color(0xffFD4F6A)
-                                    : Color(0xffBABABA),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _onItemTapped(1, 0);
+                              meropriatie = false;
+                              people = true;
+                              main = false;
+                              message = false;
+                              profile = false;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.location,
+                                    color: people
+                                        ? Color(0xffFD4F6A)
+                                        : Color(0xffBABABA),
+                                    size: ResponsiveFlutter.of(context)
+                                        .fontSize(3.75), //30.0,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.005, //4
+                                  ),
+                                  Text(
+                                    'Люди рядом',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(1.25), //10,
+                                      color: people
+                                          ? Color(0xffFD4F6A)
+                                          : Color(0xffBABABA),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        _onItemTapped(2, 0);
-                        meropriatie = false;
-                        people = false;
-                        main = true;
-                        message = false;
-                        profile = false;
-                      });
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/images/img/bg_logo_top/q.svg",
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.045,
-                              color:
-                                  main ? Color(0xffFD4F6A) : Color(0xffBABABA),
-                              fit: BoxFit.fitHeight,
-                            ),
-                            Container(
-                                //height: MediaQuery.of(context).size.height *
-                                //    0.005, //4
-                                ),
-                            Text(
-                              'Главная',
-                              style: TextStyle(
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.25), //10,
-                                color: main
-                                    ? Color(0xffFD4F6A)
-                                    : Color(0xffBABABA),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _onItemTapped(2, 0);
+                              meropriatie = false;
+                              people = false;
+                              main = true;
+                              message = false;
+                              profile = false;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/images/img/bg_logo_top/q.svg",
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.045,
+                                    color: main
+                                        ? Color(0xffFD4F6A)
+                                        : Color(0xffBABABA),
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                  Container(
+                                      //height: MediaQuery.of(context).size.height *
+                                      //    0.005, //4
+                                      ),
+                                  Text(
+                                    'Главная',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(1.25), //10,
+                                      color: main
+                                          ? Color(0xffFD4F6A)
+                                          : Color(0xffBABABA),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        _onItemTapped(3, 0);
-                        meropriatie = false;
-                        people = false;
-                        main = false;
-                        message = true;
-                        profile = false;
-                      });
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(
-                              children: [
-                                Icon(
-                                  CupertinoIcons.conversation_bubble,
-                                  color: message
-                                      ? Color(0xffFD4F6A)
-                                      : Color(0xffBABABA),
-                                  size: ResponsiveFlutter.of(context)
-                                      .fontSize(3.75), //30.0,
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: messageIndicatorRedDot
-                                      ? SvgPicture.asset(
-                                          "assets/images/img/dot_red.svg",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.027, //10,
-                                        )
-                                      : SizedBox(),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height *
-                                  0.005, //4
-                            ),
-                            Text(
-                              'Сообщения',
-                              style: TextStyle(
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.25), //10,
-                                color: message
-                                    ? Color(0xffFD4F6A)
-                                    : Color(0xffBABABA),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _onItemTapped(3, 0);
+                              meropriatie = false;
+                              people = false;
+                              main = false;
+                              message = true;
+                              profile = false;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.conversation_bubble,
+                                        color: message
+                                            ? Color(0xffFD4F6A)
+                                            : Color(0xffBABABA),
+                                        size: ResponsiveFlutter.of(context)
+                                            .fontSize(3.75), //30.0,
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: messageIndicatorRedDot
+                                            ? SvgPicture.asset(
+                                                "assets/images/img/dot_red.svg",
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.027, //10,
+                                              )
+                                            : SizedBox(),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.005, //4
+                                  ),
+                                  Text(
+                                    'Сообщения',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(1.25), //10,
+                                      color: message
+                                          ? Color(0xffFD4F6A)
+                                          : Color(0xffBABABA),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        _onItemTapped(4, 0);
-                        meropriatie = false;
-                        people = false;
-                        main = false;
-                        message = false;
-                        profile = true;
-                      });
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.person,
-                              color: profile
-                                  ? Color(0xffFD4F6A)
-                                  : Color(0xffBABABA),
-                              size: ResponsiveFlutter.of(context)
-                                  .fontSize(3.75), //30.0,
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height *
-                                  0.005, //4
-                            ),
-                            Text(
-                              'Профиль',
-                              style: TextStyle(
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.25), //10,
-                                color: profile
-                                    ? Color(0xffFD4F6A)
-                                    : Color(0xffBABABA),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _onItemTapped(4, 0);
+                              meropriatie = false;
+                              people = false;
+                              main = false;
+                              message = false;
+                              profile = true;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.person,
+                                    color: profile
+                                        ? Color(0xffFD4F6A)
+                                        : Color(0xffBABABA),
+                                    size: ResponsiveFlutter.of(context)
+                                        .fontSize(3.75), //30.0,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.005, //4
+                                  ),
+                                  Text(
+                                    'Профиль',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(1.25), //10,
+                                      color: profile
+                                          ? Color(0xffFD4F6A)
+                                          : Color(0xffBABABA),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                )
+              : Container(),
           // Positioned(
           //   top: 0,
           //   child: Column(

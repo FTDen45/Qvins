@@ -7,6 +7,7 @@ import 'package:qvins/MyModel.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
+import 'package:qvins/screens/main/main_screen.dart';
 
 class widgetMainScreenSercheSearchEvents extends StatelessWidget {
   @override
@@ -353,6 +354,14 @@ class EventsItem extends StatelessWidget {
                     elevation: 0,
                     onPressed: () {
                       print('!!!Подробнее!!!');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MainScreen(
+                              SettingsSearchPeople: 3,
+                              selectedIndex: 0,
+                            ),
+                          ));
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0)),
