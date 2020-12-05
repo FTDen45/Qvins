@@ -8,6 +8,7 @@ class MyModel with ChangeNotifier {
   bool boys = false;
   bool any = false;
   num page = 0;
+  bool messageFriends = true;
 
   //String get foo => _foo;
   int get numer2 {
@@ -28,6 +29,10 @@ class MyModel with ChangeNotifier {
 
   num get page2 {
     return page;
+  }
+
+  bool get messageFriends2 {
+    return messageFriends;
   }
 
   void set numer2(num numer2) {
@@ -52,6 +57,11 @@ class MyModel with ChangeNotifier {
 
   void set page2(int page2) {
     page = page2;
+    notifyListeners();
+  }
+
+  void set messageFriends2(bool messageFriends2) {
+    messageFriends = messageFriends2;
     notifyListeners();
   }
 }

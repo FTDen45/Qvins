@@ -216,7 +216,8 @@ class EventsItem extends StatelessWidget {
                         desc,
                         style: TextStyle(
                           fontFamily: 'SF Pro Display',
-                          fontSize: ResponsiveFlutter.of(context).fontSize(1.75), //14.0,
+                          fontSize: ResponsiveFlutter.of(context)
+                              .fontSize(1.75), //14.0,
                           color: const Color(0xFFA9A9A9),
                         ),
                       )),

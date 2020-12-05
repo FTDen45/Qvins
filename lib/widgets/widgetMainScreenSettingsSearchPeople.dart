@@ -42,7 +42,7 @@ class widgetMainScreenSettingsSearchPeople extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'SF Pro Display',
                         fontSize:
-                            ResponsiveFlutter.of(context).fontSize(2), //16.0,
+                            ResponsiveFlutter.of(context).fontSize(1.7), //16.0,
                         color: const Color(0xFFBABABA),
                       ),
                       textAlign: TextAlign.center,

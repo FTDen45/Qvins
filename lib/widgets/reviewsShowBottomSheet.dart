@@ -6,12 +6,23 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
 import 'package:qvins/screens/myscreen/review_add_screen.dart';
 
+import 'package:qvins/widgets/widgetProfileUserEdit.dart';
+import 'package:qvins/screens/main/main_screen.dart';
+
 class reviewsShowBottomSheet extends StatelessWidget {
+  reviewsShowBottomSheet({
+    this.user = false,
+    this.showBottom,
+  });
+  bool user;
+  Function showBottom;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: getProportionateScreenWidth(375),
-      height: getProportionateScreenHeight(692),
+      height: user
+          ? getProportionateScreenHeight(340)
+          : getProportionateScreenHeight(692),
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(15),
         right: getProportionateScreenWidth(15),
@@ -20,28 +31,34 @@ class reviewsShowBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Center(
-            child: SizedBox(
-              width: getProportionateScreenWidth(95),
-              height: getProportionateScreenHeight(4),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xffc4c4c4),
-                  borderRadius: BorderRadius.circular(36),
+          user
+              ? Container()
+              : Center(
+                  child: SizedBox(
+                    width: getProportionateScreenWidth(95),
+                    height: getProportionateScreenHeight(4),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffc4c4c4),
+                        borderRadius: BorderRadius.circular(36),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
           Padding(
-            padding: EdgeInsets.only(
-              bottom: getProportionateScreenHeight(16),
-              top: getProportionateScreenHeight(36),
-            ),
+            padding: user
+                ? EdgeInsets.only(
+                    //top: getProportionateScreenHeight(16),
+                    bottom: getProportionateScreenHeight(16))
+                : EdgeInsets.only(
+                    bottom: getProportionateScreenHeight(16),
+                    top: getProportionateScreenHeight(36),
+                  ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Отзывы',
+                  user ? 'Отзывы (23)' : 'Отзывы',
                   style: TextStyle(
                     fontFamily: 'SF Pro Display',
                     fontSize: ResponsiveFlutter.of(context).fontSize(3), //24.0,
@@ -53,9 +70,21 @@ class reviewsShowBottomSheet extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     print('Перейти в профиль');
+                    if (user) {
+                      showBottom(context);
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MainScreen(
+                              SettingsSearchPeople: 6,
+                              selectedIndex: 4,
+                            ),
+                          ));
+                    }
                   },
                   child: Text(
-                    'Перейти в профиль',
+                    user ? 'Посмотреть все отзывы' : 'Перейти в профиль',
                     style: TextStyle(
                       fontFamily: 'SF Pro Display',
                       fontSize:
@@ -85,129 +114,163 @@ class reviewsShowBottomSheet extends StatelessWidget {
           ),
 
           //Button next
-          Container(
-            width: getProportionateScreenWidth(344),
-            height: getProportionateScreenHeight(41),
-            margin: EdgeInsets.only(
-              top: getProportionateScreenHeight(10),
-              bottom: getProportionateScreenHeight(10),
-            ),
-            child: RaisedButton(
-              elevation: 0,
-              onPressed: () {
-                print('!!!Оставить отзыв!!!');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ReviewAddScreen()),
-                );
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
-              padding: EdgeInsets.all(0.0),
-              child: Ink(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: Color(0xff674FFD),
-                ),
-                child: Container(
-                  constraints: BoxConstraints(
-                      maxWidth: getProportionateScreenWidth(344),
-                      minHeight: MediaQuery.of(context).size.height * 0.043),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Оставить отзыв',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Display',
-                      fontSize:
-                          ResponsiveFlutter.of(context).fontSize(1.75), //14.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
+          user
+              ? Container()
+              : Container(
+                  width: getProportionateScreenWidth(344),
+                  height: getProportionateScreenHeight(41),
+                  margin: EdgeInsets.only(
+                    top: getProportionateScreenHeight(10),
+                    bottom: getProportionateScreenHeight(10),
+                  ),
+                  child: RaisedButton(
+                    elevation: 0,
+                    onPressed: () {
+                      print('!!!Оставить отзыв!!!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReviewAddScreen()),
+                      );
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                    padding: EdgeInsets.all(0.0),
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        color: Color(0xff674FFD),
+                      ),
+                      child: Container(
+                        constraints: BoxConstraints(
+                            maxWidth: getProportionateScreenWidth(344),
+                            minHeight:
+                                MediaQuery.of(context).size.height * 0.043),
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Оставить отзыв',
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Display',
+                            fontSize: ResponsiveFlutter.of(context)
+                                .fontSize(1.75), //14.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ),
-          ),
-          Container(
-            height: getProportionateScreenHeight(495),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+          user
+              ? Padding(
+                  padding:
+                      EdgeInsets.only(top: getProportionateScreenWidth(16)),
+                  child: Column(
+                    children: [
+                      reviewsItem(
+                        imgpath: 'assets/images/img/PeopleAvatar.png',
+                        fio: 'Ислам Кожамниязов',
+                        score: '4.5',
+                        desc:
+                            'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                      ),
+                      reviewsItem(
+                        imgpath: 'assets/images/img/PeopleAvatar.png',
+                        fio: 'Ислам Кожамниязов',
+                        score: '4.5',
+                        desc:
+                            'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                      ),
+                      reviewsItem(
+                        imgpath: 'assets/images/img/PeopleAvatar.png',
+                        fio: 'Ислам Кожамниязов',
+                        score: '4.5',
+                        desc:
+                            'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                      ),
+                    ],
                   ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                )
+              : Container(
+                  height: getProportionateScreenHeight(495),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                        reviewsItem(
+                          imgpath: 'assets/images/img/PeopleAvatar.png',
+                          fio: 'Ислам Кожамниязов',
+                          score: '4.5',
+                          desc:
+                              'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
+                        ),
+                      ],
+                    ),
                   ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                  reviewsItem(
-                    imgpath: 'assets/images/img/PeopleAvatar.png',
-                    fio: 'Ислам Кожамниязов',
-                    score: '4.5',
-                    desc:
-                        'Хочу отметить классное чувство юмора,  отлично погуляли! Буду ждать встречи еще',
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
         ],
       ),
     );

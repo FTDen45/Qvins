@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
+import 'package:qvins/screens/main/main_screen.dart';
 
 class widgetMainScreen extends StatelessWidget {
   widgetMainScreen({this.BottomSheet});
@@ -28,7 +29,7 @@ class widgetMainScreen extends StatelessWidget {
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                     image: DecorationImage(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       image: AssetImage(
                         "assets/images/img/widgetMainScreen_01.jpg",
                       ),
@@ -59,195 +60,210 @@ class widgetMainScreen extends StatelessWidget {
                   right: MediaQuery.of(context).size.width * 0.043, //16
                   child: Container(
                     //color: Color(0xffff0000),
-                    height: MediaQuery.of(context).size.height * 0.25, //171,
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width *
-                                0.832, //312.0,
-                            height: getProportionateScreenHeight(36.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Лейла',
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Display',
-                                    fontSize: ResponsiveFlutter.of(context)
-                                        .fontSize(3.75), //30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Container(
-                                  width: getProportionateScreenWidth(8),
-                                ),
-                                Text(
-                                  '18',
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Display',
-                                    fontSize: ResponsiveFlutter.of(context)
-                                        .fontSize(2.75), //22,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Container(
-                                  width: getProportionateScreenWidth(8),
-                                ),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(20.0),
-                                  child: Align(
-                                    alignment: AlignmentDirectional.center,
-                                    child: SvgPicture.asset(
-                                      "assets/images/img/star.svg",
-                                      width: getProportionateScreenWidth(8),
+                    //height: MediaQuery.of(context).size.height * 0.25, //171,
+                    child: GestureDetector(
+                      onTap: () {
+                        print('ditailes people!!!');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                SettingsSearchPeople: 2,
+                                selectedIndex: 2,
+                                widgetMenuBottomMessagesUserChatBool: true,
+                              ),
+                            ));
+                      },
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width *
+                                  0.832, //312.0,
+                              //height: getProportionateScreenHeight(36.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'Лейла',
+                                    style: TextStyle(
+                                      fontFamily: 'SF Pro Display',
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(3.75), //30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  width: getProportionateScreenWidth(8),
-                                ),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(20.0),
-                                  child: Align(
-                                    alignment: AlignmentDirectional.center,
-                                    child: Text(
-                                      '4.5',
-                                      style: TextStyle(
-                                        fontFamily: 'SF Pro Display',
-                                        fontSize: ResponsiveFlutter.of(context)
-                                            .fontSize(1.75), //14,
-                                        color: const Color(0xFFBABABA),
-                                        fontWeight: FontWeight.w500,
+                                  Container(
+                                    width: getProportionateScreenWidth(8),
+                                  ),
+                                  Text(
+                                    '18',
+                                    style: TextStyle(
+                                      fontFamily: 'SF Pro Display',
+                                      fontSize: ResponsiveFlutter.of(context)
+                                          .fontSize(2.75), //22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: getProportionateScreenWidth(8),
+                                  ),
+                                  SizedBox(
+                                    height: getProportionateScreenHeight(20.0),
+                                    child: Align(
+                                      alignment: AlignmentDirectional.center,
+                                      child: SvgPicture.asset(
+                                        "assets/images/img/star.svg",
+                                        width: getProportionateScreenWidth(8),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    width: getProportionateScreenWidth(8),
+                                  ),
+                                  SizedBox(
+                                    height: getProportionateScreenHeight(20.0),
+                                    child: Align(
+                                      alignment: AlignmentDirectional.center,
+                                      child: Text(
+                                        '4.5',
+                                        style: TextStyle(
+                                          fontFamily: 'SF Pro Display',
+                                          fontSize:
+                                              ResponsiveFlutter.of(context)
+                                                  .fontSize(1.75), //14,
+                                          color: const Color(0xFFBABABA),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          height: getProportionateScreenHeight(6),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: getProportionateScreenWidth(8.0),
-                              height: getProportionateScreenWidth(8.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xff3BC341),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
+                          Container(
+                            height: getProportionateScreenHeight(6),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: getProportionateScreenWidth(8.0),
+                                height: getProportionateScreenWidth(8.0),
+                                decoration: BoxDecoration(
+                                  color: Color(0xff3BC341),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: getProportionateScreenWidth(6),
-                            ),
-                            Text(
-                              'Недавно была в сети',
+                              Container(
+                                width: getProportionateScreenWidth(6),
+                              ),
+                              Text(
+                                'Недавно была в сети',
+                                style: TextStyle(
+                                  fontFamily: 'SF Pro Display',
+                                  fontSize: ResponsiveFlutter.of(context)
+                                      .fontSize(1.5), //12.0,
+                                  color: const Color(0xFFA3A3A3),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: getProportionateScreenHeight(4),
+                          ),
+                          SizedBox(
+                            width: getProportionateScreenWidth(312.0),
+                            //height: getProportionateScreenHeight(70.0),
+                            child: Text(
+                              'Я тут для того, чтобы заводить новые знакомства. Рисую, много смеюсь и люблю гулять. Кто пойдет на концерт в Белгороде?',
                               style: TextStyle(
                                 fontFamily: 'SF Pro Display',
                                 fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.5), //12.0,
-                                color: const Color(0xFFA3A3A3),
+                                    .fontSize(2.0), //16.0,
+                                color: const Color(0xFFE1E1E1),
                               ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: getProportionateScreenHeight(4),
-                        ),
-                        SizedBox(
-                          width: getProportionateScreenWidth(312.0),
-                          height: getProportionateScreenHeight(70.0),
-                          child: Text(
-                            'Я тут для того, чтобы заводить новые знакомства. Рисую, много смеюсь и люблю гулять. Кто пойдет на концерт в Белгороде?',
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: ResponsiveFlutter.of(context)
-                                  .fontSize(2.0), //16.0,
-                              color: const Color(0xFFE1E1E1),
                             ),
                           ),
-                        ),
-                        Container(
-                          height: getProportionateScreenHeight(10),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xffFD4F6A),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(18),
+                          Container(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xffFD4F6A),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(18),
+                                  ),
+                                ),
+                                width: getProportionateScreenWidth(18.0),
+                                height: getProportionateScreenHeight(18.0),
+                                child: Center(
+                                  child: Icon(
+                                    CupertinoIcons.location,
+                                    size: getProportionateScreenWidth(10.0),
+                                    color: Color(0xffffffff),
+                                  ),
                                 ),
                               ),
-                              width: getProportionateScreenWidth(18.0),
-                              height: getProportionateScreenHeight(18.0),
-                              child: Center(
-                                child: Icon(
-                                  CupertinoIcons.location,
-                                  size: getProportionateScreenWidth(10.0),
-                                  color: Color(0xffffffff),
+                              Container(
+                                width: getProportionateScreenWidth(6),
+                              ),
+                              Text(
+                                '2 км от Вас',
+                                style: TextStyle(
+                                  fontFamily: 'SF Pro Display',
+                                  fontSize: ResponsiveFlutter.of(context)
+                                      .fontSize(1.5), //12.0,
+                                  color: const Color(0xFF909090),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: getProportionateScreenWidth(6),
-                            ),
-                            Text(
-                              '2 км от Вас',
-                              style: TextStyle(
-                                fontFamily: 'SF Pro Display',
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.5), //12.0,
-                                color: const Color(0xFF909090),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: getProportionateScreenHeight(10),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xffFD4F6A),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(18),
+                            ],
+                          ),
+                          Container(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xffFD4F6A),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(18),
+                                  ),
+                                ),
+                                width: getProportionateScreenWidth(18.0),
+                                height: getProportionateScreenHeight(18.0),
+                                child: Center(
+                                  child: Icon(
+                                    CupertinoIcons.map,
+                                    size: getProportionateScreenWidth(10.0),
+                                    color: Color(0xffffffff),
+                                  ),
                                 ),
                               ),
-                              width: getProportionateScreenWidth(18.0),
-                              height: getProportionateScreenHeight(18.0),
-                              child: Center(
-                                child: Icon(
-                                  CupertinoIcons.map,
-                                  size: getProportionateScreenWidth(10.0),
-                                  color: Color(0xffffffff),
+                              Container(
+                                width: getProportionateScreenWidth(6),
+                              ),
+                              Text(
+                                'Живет в Белгороде',
+                                style: TextStyle(
+                                  fontFamily: 'SF Pro Display',
+                                  fontSize: ResponsiveFlutter.of(context)
+                                      .fontSize(1.5), //12.0,
+                                  color: const Color(0xFF909090),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: getProportionateScreenWidth(6),
-                            ),
-                            Text(
-                              'Живет в Белгороде',
-                              style: TextStyle(
-                                fontFamily: 'SF Pro Display',
-                                fontSize: ResponsiveFlutter.of(context)
-                                    .fontSize(1.5), //12.0,
-                                color: const Color(0xFF909090),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -271,7 +287,8 @@ class widgetMainScreen extends StatelessWidget {
                             'Отзывы',
                             style: TextStyle(
                               fontFamily: 'SF Pro Display',
-                              fontSize: ResponsiveFlutter.of(context).fontSize(1.5), //12.0,
+                              fontSize: ResponsiveFlutter.of(context)
+                                  .fontSize(1.5), //12.0,
                               color: Colors.white,
                             ),
                           ),

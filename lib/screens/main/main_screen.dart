@@ -13,16 +13,30 @@ import 'package:qvins/size_cofige.dart';
 import 'package:qvins/constans.dart';
 import 'package:qvins/MyModel.dart';
 
+import 'package:qvins/widgets/reviewsShowBottomSheet.dart';
+import 'package:qvins/widgets/reviewsShowBottomSheet2.dart';
+
 import 'package:qvins/widgets/widgetMenuBottomEvents.dart';
 import 'package:qvins/widgets/widgetMainScreenSettingsSearchEvents.dart';
 import 'package:qvins/widgets/widgetMenuBottomPeopl.dart';
-import 'package:qvins/widgets/reviewsShowBottomSheet.dart';
 import 'package:qvins/widgets/widgetMainScreenSettingsSearchPeople.dart';
 import 'package:qvins/widgets/widgetMainScreenSercheSearchEvents.dart';
 import 'package:qvins/widgets/widgetMainScreenItemSearchEvents.dart';
+
+import 'package:qvins/widgets/widgetMainScreenUserItem.dart';
 import 'package:qvins/widgets/widgetMenuBottomMessages.dart';
+import 'package:qvins/widgets/widgetMenuBottomMessagesMap.dart';
 import 'package:qvins/widgets/widgetMenuBottomMessagesUserChat.dart';
 import 'package:qvins/widgets/widgetMenuBottomMessagesUserChatEvent.dart';
+
+import 'package:qvins/widgets/widgetProfileAllAlbomes.dart';
+import 'package:qvins/widgets/widgetProfileAllAlbomesItem.dart';
+import 'package:qvins/widgets/widgetProfileAllAlbomesImageView.dart';
+import 'package:qvins/widgets/widgetProfileAllAlbomesCreate.dart';
+import 'package:qvins/widgets/widgetProfileAllAlbomesEdit.dart';
+
+import 'package:qvins/widgets/widgetProfileUserEdit.dart';
+import 'package:qvins/widgets/widgetProfileUserSearchPeople.dart';
 
 import 'package:qvins/functions/funtion.dart';
 
@@ -101,6 +115,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  void _showWindow2(context, name) {
+    showBottomSheet(
+      //showModalBottomSheet(
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(20.0),
+      // ),
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (builder) {
+        return reviewsShowBottomSheet2(name: name);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _widgetScreensUsers(selectedIndex, context, optionStyle) {
@@ -151,8 +179,10 @@ class _MainScreenState extends State<MainScreen> {
             return PagesViewer(
               showWindow: _showWindow,
             );
-          } else {
+          } else if (i == 1) {
             return widgetMainScreenSettingsSearchPeople();
+          } else if (i == 2) {
+            return widgetMainScreenUserItem(showWindow: _showWindow);
           }
           break;
         case 3:
@@ -163,10 +193,34 @@ class _MainScreenState extends State<MainScreen> {
             return widgetMenuBottomMessagesUserChat();
           } else if (i == 2) {
             return widgetMenuBottomMessagesUserChatEvent();
+          } else if (i == 3) {
+            return widgetMenuBottomMessagesMap();
           }
           break;
         case 4:
           print('Профиль');
+          if (i == 0) {
+            return widgetMainScreenUserItem(
+              showWindow: _showWindow,
+              TypeViewAddFriend: false,
+              TwoBtn: true,
+              showWindow2: _showWindow2,
+            );
+          } else if (i == 1) {
+            return widgetProfileAllAlbomes();
+          } else if (i == 2) {
+            return widgetProfileAllAlbomesCreate();
+          } else if (i == 3) {
+            return widgetProfileAllAlbomesItem();
+          } else if (i == 4) {
+            return widgetProfileAllAlbomesEdit();
+          } else if (i == 5) {
+            return widgetProfileAllAlbomesImageView();
+          } else if (i == 6) {
+            return widgetProfileUserEdit();
+          } else if (i == 7) {
+            return widgetProfileUserSearchPeople();
+          }
           break;
         default:
           print('Нижнее меню');
@@ -175,6 +229,7 @@ class _MainScreenState extends State<MainScreen> {
 
     SizeConfig().init(context);
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF4F4F4),
       appBar: chooseAppBar(context, selectedIndex, widget.SettingsSearchPeople),
       //body: _widgetOptions.elementAt(selectedIndex),
