@@ -50,9 +50,9 @@ class widgetMainScreenSettingsSearchPeople extends StatelessWidget {
                     //Button next
                     Container(
                       width: getProportionateScreenWidth(311),
-                      height: getProportionateScreenHeight(41),
-                      // margin:
-                      //     EdgeInsets.only(top: getProportionateScreenHeight(10)),
+                      //height: getProportionateScreenHeight(41),
+                      margin: EdgeInsets.only(
+                          top: getProportionateScreenHeight(10)),
                       child: RaisedButton(
                         elevation: 0,
                         onPressed: () {
@@ -185,7 +185,7 @@ class widgetMainScreenSettingsSearchPeople extends StatelessWidget {
                     horizontal: getProportionateScreenWidth(10),
                     vertical: getProportionateScreenHeight(10)),
                 width: getProportionateScreenWidth(343),
-                height: getProportionateScreenHeight(91.7),
+                //height: getProportionateScreenHeight(91.7),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(4))),
@@ -245,7 +245,7 @@ class widgetMainScreenSettingsSearchPeople extends StatelessWidget {
                     horizontal: getProportionateScreenWidth(10),
                     vertical: getProportionateScreenHeight(10)),
                 width: getProportionateScreenWidth(343),
-                height: getProportionateScreenHeight(91.7),
+                //height: getProportionateScreenHeight(91.7),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(4))),

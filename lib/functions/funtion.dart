@@ -1032,12 +1032,13 @@ class chooseAppBar extends PreferredSize {
                                       6.0)), //this right here
                               child: Container(
                                 width: getProportionateScreenWidth(344),
-                                height: getProportionateScreenHeight(200),
+                                height: getProportionateScreenHeight(300),
                                 child: Padding(
                                   padding: EdgeInsets.all(
                                       getProportionateScreenWidth(12.0)),
                                   child: Column(
-                                    //mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     //crossAxisAlignment:
                                     //    CrossAxisAlignment.start,
                                     children: [

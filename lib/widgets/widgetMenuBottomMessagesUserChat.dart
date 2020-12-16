@@ -86,15 +86,25 @@ class widgetMenuBottomMessagesUserChat extends StatelessWidget {
                     color: Colors.white,
                     //margin: EdgeInsets.symmetric(vertical: 10),
                     padding: EdgeInsets.symmetric(
-                      vertical: getProportionateScreenHeight(10),
-                      horizontal: getProportionateScreenHeight(16),
-                    ),
+                        //vertical: getProportionateScreenHeight(10),
+                        horizontal: MediaQuery.of(context).size.width *
+                            0.026 //getProportionateScreenHeight(16),
+                        ),
+
                     height: getProportionateScreenHeight(61),
                     width: getProportionateScreenWidth(375),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: getProportionateScreenWidth(300),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: getProportionateScreenHeight(10),
+                            //horizontal: getProportionateScreenHeight(16),
+                          ),
+                          // constraints: BoxConstraints(
+                          //     minWidth: 200,
+                          //     maxWidth: getProportionateScreenWidth(375)),
+                          width: MediaQuery.of(context).size.width * 0.78,
                           child: TextField(
                             style: TextStyle(
                               fontFamily: 'SF UI Text',
@@ -133,17 +143,23 @@ class widgetMenuBottomMessagesUserChat extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                                 contentPadding: EdgeInsets.only(
-                                  bottom: getProportionateScreenHeight(37) /
+                                  bottom: getProportionateScreenHeight(40) /
                                       2, // HERE THE IMPORTANT PART
                                   left: getProportionateScreenWidth(10),
                                 )),
                           ),
                         ),
                         IconButton(
-                            icon: Icon(Icons.mic, color: Color(0xffBABABA)),
-                            onPressed: () {
-                              debugPrint('Microphone');
-                            }),
+                          icon: Icon(
+                            Icons.mic,
+                            color: Color(0xffBABABA),
+                            size: MediaQuery.of(context).size.width * 0.1,
+                          ),
+                          onPressed: () {
+                            debugPrint('Microphone');
+                          },
+                          iconSize: MediaQuery.of(context).size.width * 0.1,
+                        ),
                       ],
                     ),
                   ),
