@@ -8,7 +8,15 @@ class MyModel with ChangeNotifier {
   bool boys = false;
   bool any = false;
   num page = 0;
+  num selectedIndex = 2;
+  num numBar = 0;
   bool messageFriends = true;
+
+  bool meropriatie = false;
+  bool people = false;
+  bool main = true;
+  bool message = false;
+  bool profile = false;
 
   //String get foo => _foo;
   int get numer2 {
@@ -27,8 +35,36 @@ class MyModel with ChangeNotifier {
     return any;
   }
 
+  bool get meropriatie2 {
+    return meropriatie;
+  }
+
+  bool get people2 {
+    return people;
+  }
+
+  bool get main2 {
+    return main;
+  }
+
+  bool get message2 {
+    return message;
+  }
+
+  bool get profile2 {
+    return profile;
+  }
+
   num get page2 {
     return page;
+  }
+
+  num get selectedIndex2 {
+    return selectedIndex;
+  }
+
+  num get numBar2 {
+    return numBar;
   }
 
   bool get messageFriends2 {
@@ -55,8 +91,43 @@ class MyModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void set meropriatie2(bool meropriatie) {
+    meropriatie = meropriatie2;
+    notifyListeners();
+  }
+
+  void set people2(bool people2) {
+    people = people2;
+    notifyListeners();
+  }
+
+  void set main2(bool main2) {
+    main = main2;
+    notifyListeners();
+  }
+
+  void set message2(bool message2) {
+    message = message2;
+    notifyListeners();
+  }
+
+  void set profile2(bool profile2) {
+    profile = profile2;
+    notifyListeners();
+  }
+
   void set page2(int page2) {
     page = page2;
+    notifyListeners();
+  }
+
+  void set selectedIndex2(num selectedIndex2) {
+    selectedIndex = selectedIndex2;
+    notifyListeners();
+  }
+
+  void set numBar2(num numBar2) {
+    numBar = numBar2;
     notifyListeners();
   }
 

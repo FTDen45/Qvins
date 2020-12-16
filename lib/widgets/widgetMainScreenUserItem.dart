@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:qvins/MyModel.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
 
 import 'package:qvins/screens/main/main_screen.dart';
-import 'package:qvins/MyModel.dart';
 import 'package:qvins/widgets/reviewsShowBottomSheet.dart';
 
 class widgetMainScreenUserItem extends StatelessWidget {
@@ -28,7 +28,7 @@ class widgetMainScreenUserItem extends StatelessWidget {
       builder: (context, value, child) => Container(
         color: Color(0xffFAFAFA),
         width: getProportionateScreenWidth(375),
-        height: getProportionateScreenHeight(412),
+        //height: getProportionateScreenHeight(412),
         //child: Body(),
         child: SingleChildScrollView(
           child: Column(
@@ -313,6 +313,8 @@ class widgetMainScreenUserItem extends StatelessWidget {
                           onTap: () {
                             print('Посмотреть все !!!');
                             //showWindow(context);
+                            model.selectedIndex = 4;
+                            model.numBar = 1;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

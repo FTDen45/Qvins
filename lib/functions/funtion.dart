@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:provider/provider.dart';
+import 'package:qvins/MyModel.dart';
+
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
 
@@ -17,6 +20,7 @@ class chooseAppBar extends PreferredSize {
   BuildContext context;
   chooseAppBar(this.context, this.selectedIndex, this.numBar);
   _chooseAppBar(context, _selectedIndex, _numBar) {
+    final model = Provider.of<MyModel>(context);
     switch (_selectedIndex) {
       case 0:
         print('_numBar:$_numBar');
@@ -40,6 +44,9 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Reload!!!');
+
+                    model.selectedIndex = 0;
+                    model.numBar = 1;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -81,6 +88,9 @@ class chooseAppBar extends PreferredSize {
                       //         SettingsSearchPeople: 1,
                       //       ),
                       //     ));
+                      model.selectedIndex = 0;
+                      model.numBar = 2;
+                      print('${model.selectedIndex} - ${model.numBar}');
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -114,6 +124,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!arrow_back.svg!!!');
+                    model.selectedIndex = 0;
+                    model.numBar = 0;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -130,7 +142,7 @@ class chooseAppBar extends PreferredSize {
               'Настройки поиска людей',
               style: TextStyle(
                 fontFamily: 'SF Pro Display',
-                fontSize: ResponsiveFlutter.of(context).fontSize(2.25), //18.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //18.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -172,6 +184,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!arrow_back.svg!!!');
+                    model.selectedIndex = 0;
+                    model.numBar = 0;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -185,10 +199,10 @@ class chooseAppBar extends PreferredSize {
               },
             ),
             title: Text(
-              'Настройки поиска людей',
+              'Поиск по мероприятиям',
               style: TextStyle(
                 fontFamily: 'SF Pro Display',
-                fontSize: ResponsiveFlutter.of(context).fontSize(2.25), //18.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //18.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -230,6 +244,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!arrow_back.svg!!!');
+                    model.selectedIndex = 0;
+                    model.numBar = 0;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -305,6 +321,8 @@ class chooseAppBar extends PreferredSize {
                     ), //reload.svg
                     onPressed: () {
                       print('!!!Filled.png!!!');
+                      model.selectedIndex = 2;
+                      model.numBar = 1;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -338,6 +356,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!arrow_back.svg!!!');
+                    model.selectedIndex = 2;
+                    model.numBar = 0;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -397,6 +417,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 2;
+                    model.numBar = 2;
                     Navigator.pop(context);
                   },
                 );
@@ -444,12 +466,14 @@ class chooseAppBar extends PreferredSize {
                     ), //reload.svg
                     onPressed: () {
                       print('!!!Filled.png!!!');
+                      model.selectedIndex = 3;
+                      model.numBar = 4;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => MainScreen(
-                              SettingsSearchPeople: 1,
-                              selectedIndex: 2,
+                              SettingsSearchPeople: 0,
+                              selectedIndex: 1,
                             ),
                           ));
                     }
@@ -479,6 +503,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 3;
+                    model.numBar = 0;
                     Navigator.pop(context);
                   },
                 );
@@ -502,7 +528,8 @@ class chooseAppBar extends PreferredSize {
                     'Валерия',
                     style: TextStyle(
                       fontFamily: 'SF UI Text',
-                      fontSize: 16.0,
+                      fontSize:
+                          ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                       color: const Color(0xFF222222),
                       fontWeight: FontWeight.w600,
                     ),
@@ -530,6 +557,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 3;
+                    model.numBar = 0;
                     Navigator.pop(context);
                   },
                 );
@@ -553,7 +582,8 @@ class chooseAppBar extends PreferredSize {
                     'Концерт Коржа',
                     style: TextStyle(
                       fontFamily: 'SF UI Text',
-                      fontSize: 16.0,
+                      fontSize:
+                          ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                       color: const Color(0xFF222222),
                       fontWeight: FontWeight.w600,
                     ),
@@ -581,6 +611,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 3;
+                    model.numBar = 0;
                     Navigator.pop(context);
                   },
                 );
@@ -593,6 +625,66 @@ class chooseAppBar extends PreferredSize {
               color: Color(0xffFD4F6A),
               //fit: BoxFit.cover,
             ),
+          );
+        } else if (_numBar == 4) {
+          return AppBar(
+            toolbarHeight: MediaQuery.of(context).size.width * 0.16,
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Color(0xffffffff),
+            leadingWidth: MediaQuery.of(context).size.width * 0.19,
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/images/img/arrow_back.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    color: Color(0xff674FFD),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!arrow_back.svg!!!');
+                    model.selectedIndex = 3;
+                    model.numBar = 0;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainScreen(
+                            SettingsSearchPeople: 0,
+                            selectedIndex: 0,
+                          ),
+                        ));
+                  },
+                );
+              },
+            ),
+            title: Text(
+              'Настройки поиска людей',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //18.0,
+                color: const Color(0xFF222222),
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            actions: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.19,
+                child: IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/images/img/check_gal.svg',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    fit: BoxFit.cover,
+                    //color: Color(0xff),
+                  ), //reload.svg
+                  onPressed: () {
+                    print('!!!check_gal.svg!!!');
+                  },
+                ),
+              ),
+            ], //Filled.svg
           );
         }
         break;
@@ -607,15 +699,19 @@ class chooseAppBar extends PreferredSize {
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: SvgPicture.asset(
-                    'assets/images/img/arrow_back.svg',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                    fit: BoxFit.cover,
-                    color: Color(0xffBABABA),
-                  ), //reload.svg
+                  icon: model.selectedIndex == 4
+                      ? Container()
+                      : SvgPicture.asset(
+                          'assets/images/img/arrow_back.svg',
+                          width: MediaQuery.of(context).size.width * 0.08,
+                          height: MediaQuery.of(context).size.width * 0.08,
+                          fit: BoxFit.cover,
+                          color: Color(0xffBABABA),
+                        ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 3;
+                    model.numBar = 0;
                     Navigator.pop(context);
                   },
                 );
@@ -648,6 +744,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 4;
+                    model.numBar = 0;
                     Navigator.pop(context);
                   },
                 );
@@ -657,7 +755,7 @@ class chooseAppBar extends PreferredSize {
               'Все альбомы',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -682,6 +780,8 @@ class chooseAppBar extends PreferredSize {
                     // ), //reload.svg
                     onPressed: () {
                       print('!!!Filled.png!!!');
+                      model.selectedIndex = 4;
+                      model.numBar = 2;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -716,6 +816,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 4;
+                    model.numBar = 1;
                     Navigator.pop(context);
                   },
                 );
@@ -725,7 +827,7 @@ class chooseAppBar extends PreferredSize {
               'Создать новый альбом',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -750,6 +852,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 4;
+                    model.numBar = 3;
                     Navigator.pop(context);
                   },
                 );
@@ -759,7 +863,7 @@ class chooseAppBar extends PreferredSize {
               'Альбом “Концерт Коржа”',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -784,6 +888,8 @@ class chooseAppBar extends PreferredSize {
                     // ), //reload.svg
                     onPressed: () {
                       print('!!!edit album!!!');
+                      model.selectedIndex = 4;
+                      model.numBar = 4;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -818,6 +924,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 4;
+                    model.numBar = 3;
                     Navigator.pop(context);
                   },
                 );
@@ -827,7 +935,7 @@ class chooseAppBar extends PreferredSize {
               'Добавить фотографии',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -878,6 +986,8 @@ class chooseAppBar extends PreferredSize {
                   ), //reload.svg
                   onPressed: () {
                     print('!!!Back!!!');
+                    model.selectedIndex = 4;
+                    model.numBar = 1;
                     Navigator.pop(context);
                   },
                 );
@@ -887,7 +997,7 @@ class chooseAppBar extends PreferredSize {
               '6 из 12',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFFffffff),
                 fontWeight: FontWeight.w600,
               ),
@@ -921,10 +1031,11 @@ class chooseAppBar extends PreferredSize {
                                   borderRadius: BorderRadius.circular(
                                       6.0)), //this right here
                               child: Container(
-                                width: 344,
-                                height: 184,
+                                width: getProportionateScreenWidth(344),
+                                height: getProportionateScreenHeight(200),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(
+                                      getProportionateScreenWidth(12.0)),
                                   child: Column(
                                     //mainAxisAlignment: MainAxisAlignment.center,
                                     //crossAxisAlignment:
@@ -932,7 +1043,7 @@ class chooseAppBar extends PreferredSize {
                                     children: [
                                       Icon(
                                         Icons.delete_forever,
-                                        size: 30,
+                                        size: getProportionateScreenWidth(30),
                                         color: Color(0xffCF3C3C),
                                       ),
                                       // SvgPicture.asset(
@@ -946,7 +1057,9 @@ class chooseAppBar extends PreferredSize {
                                         style: TextStyle(
                                           color: Color(0xff222222),
                                           fontFamily: 'SF Pro Display',
-                                          fontSize: 18,
+                                          fontSize:
+                                              ResponsiveFlutter.of(context)
+                                                  .fontSize(2.25), //18,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -956,7 +1069,9 @@ class chooseAppBar extends PreferredSize {
                                           style: TextStyle(
                                             color: Color(0xffBABABA),
                                             fontFamily: 'SF Pro Display',
-                                            fontSize: 16,
+                                            fontSize:
+                                                ResponsiveFlutter.of(context)
+                                                    .fontSize(2.0), //16,
                                             fontWeight: FontWeight.w400,
                                           ),
                                           textAlign: TextAlign.center,
@@ -972,10 +1087,19 @@ class chooseAppBar extends PreferredSize {
                                                 print('No');
                                                 Navigator.pop(context);
                                               },
-                                              child: Text(
-                                                "Нет",
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(
+                                                    getProportionateScreenWidth(
+                                                        4)),
+                                                child: Text(
+                                                  "Нет",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: ResponsiveFlutter
+                                                            .of(context)
+                                                        .fontSize(2.0), //16,
+                                                  ),
+                                                ),
                                               ),
                                               color: const Color(0xFF3BC341),
                                             ),
@@ -991,10 +1115,19 @@ class chooseAppBar extends PreferredSize {
                                                 print('yes');
                                                 Navigator.pop(context);
                                               },
-                                              child: Text(
-                                                "Да",
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(
+                                                    getProportionateScreenWidth(
+                                                        4)),
+                                                child: Text(
+                                                  "Да",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: ResponsiveFlutter
+                                                            .of(context)
+                                                        .fontSize(2.0), //16,
+                                                  ),
+                                                ),
                                               ),
                                               color: const Color(0xFFCF3C3C),
                                             ),
@@ -1042,7 +1175,7 @@ class chooseAppBar extends PreferredSize {
               'Настройка профиля',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),
@@ -1110,7 +1243,7 @@ class chooseAppBar extends PreferredSize {
               'Выбрать определенных людей',
               style: TextStyle(
                 fontFamily: 'SF UI Text',
-                fontSize: 16.0,
+                fontSize: ResponsiveFlutter.of(context).fontSize(2.0), //16.0,
                 color: const Color(0xFF222222),
                 fontWeight: FontWeight.w600,
               ),

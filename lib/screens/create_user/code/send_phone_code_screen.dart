@@ -118,9 +118,9 @@ class _IPhone11ProX44State extends State<IPhone11ProX44> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: PinEntryTextField(
                                   fieldWidth:
-                                      MediaQuery.of(context).size.width * 0.189,
+                                      MediaQuery.of(context).size.width * 0.11,
                                   fieldHeight:
-                                      MediaQuery.of(context).size.height * 0.09,
+                                      MediaQuery.of(context).size.height * 0.1,
                                   margin:
                                       MediaQuery.of(context).size.width * 0.025,
                                   padding: MediaQuery.of(context).size.height *
@@ -136,7 +136,7 @@ class _IPhone11ProX44State extends State<IPhone11ProX44> {
                                   ),
                                   showFieldAsBox: true,
                                   onSubmit: (String pin) {
-                                    if (pin == '1111') {
+                                    if (pin == '111111') {
                                       createAlertDialogPrivacyPolicy(
                                           context,
                                           Icon(

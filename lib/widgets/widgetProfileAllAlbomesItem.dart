@@ -7,6 +7,9 @@ import 'package:qvins/size_cofige.dart';
 
 import 'package:qvins/screens/main/main_screen.dart';
 
+import 'package:provider/provider.dart';
+import 'package:qvins/MyModel.dart';
+
 class widgetProfileAllAlbomesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,9 @@ class CategoryItem extends StatelessWidget {
 
   CategoryItem(this.id, this.title, this.img);
 
-  void selectCategory(BuildContext ctx) {
+  void selectCategory(BuildContext ctx, model) {
+    model.selectedIndex = 4;
+    model.numBar = 5;
     Navigator.push(
         ctx,
         MaterialPageRoute(
@@ -52,6 +57,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<MyModel>(context);
     return Container(
       // margin: EdgeInsets.symmetric(
       //   horizontal: getProportionateScreenWidth(8),
@@ -59,7 +65,7 @@ class CategoryItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           //tapEvents(tap);
-          selectCategory(context);
+          selectCategory(context, model);
         },
         child: Container(
           width: getProportionateScreenWidth(168),

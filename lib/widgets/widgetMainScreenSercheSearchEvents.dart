@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 
+import 'package:provider/provider.dart';
 import 'package:qvins/MyModel.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
@@ -83,181 +83,6 @@ class widgetMainScreenSercheSearchEvents extends StatelessWidget {
   }
 }
 
-class _btnBoyGirlAll extends StatefulWidget {
-  String textGender = '';
-  bool WomenButton = false;
-  num choose;
-  _btnBoyGirlAll(this.textGender, this.WomenButton, this.choose);
-  @override
-  __btnBoyGirlAllState createState() => __btnBoyGirlAllState();
-}
-
-class __btnBoyGirlAllState extends State<_btnBoyGirlAll> {
-  @override
-  Widget build(BuildContext context) {
-    final model = Provider.of<MyModel>(context, listen: false);
-    return Container(
-      width: getProportionateScreenWidth(100),
-      height: getProportionateScreenHeight(29),
-      //margin: EdgeInsets.only(top: 20, bottom: 20),
-      child: RaisedButton(
-        onPressed: () {
-          //final model = Provider.of<MyModel>(context);
-          if (widget.choose == 0) {
-            model.girls2 = true;
-            model.boys2 = false;
-            model.any2 = false;
-          }
-          if (widget.choose == 1) {
-            model.girls2 = false;
-            model.boys2 = true;
-            model.any2 = false;
-          }
-          if (widget.choose == 2) {
-            model.girls2 = false;
-            model.boys2 = false;
-            model.any2 = true;
-          }
-          print('${model.numer}-${widget.choose}');
-          print(widget.WomenButton);
-        },
-        elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-        padding: EdgeInsets.all(0.0),
-        child: Ink(
-          decoration: widget.WomenButton
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: Color(0xffFD4F6A),
-                )
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: Color(0xffF4F4F4),
-                  border: Border.all(
-                    color: Color(0xffBABABA),
-                    width: 1,
-                  ),
-                ),
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: getProportionateScreenWidth(100),
-              minHeight: getProportionateScreenHeight(29),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              widget.textGender,
-              style: widget.WomenButton
-                  ? TextStyle(
-                      fontFamily: 'SF Pro Display',
-                      fontSize:
-                          ResponsiveFlutter.of(context).fontSize(1.75), //14.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    )
-                  : TextStyle(
-                      fontFamily: 'SF Pro Display',
-                      fontSize:
-                          ResponsiveFlutter.of(context).fontSize(1.75), //18.0,
-                      color: const Color(0xFFBABABA),
-                      fontWeight: FontWeight.w300,
-                    ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class RangSliderAge extends StatefulWidget {
-  String title;
-  String textCount;
-  num min;
-  num max;
-  double start;
-  double end;
-  num chooceTypeText;
-  RangSliderAge(this.title, this.textCount, this.min, this.max, this.start,
-      this.end, this.chooceTypeText);
-  @override
-  _RangSliderAgeState createState() => _RangSliderAgeState();
-}
-
-class _RangSliderAgeState extends State<RangSliderAge> {
-  RangeValues _currentRangeValues;
-  num start;
-  num end;
-  @override
-  void initState() {
-    start = widget.start;
-    end = widget.end;
-    _currentRangeValues = RangeValues(widget.start, widget.end);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              widget.title,
-              style: TextStyle(
-                fontFamily: 'SF Pro Display',
-                fontSize: ResponsiveFlutter.of(context).fontSize(2), //16.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Spacer(),
-            Text(
-              (widget.chooceTypeText == 0)
-                  ? '${start} - ${end} руб'
-                  : '${start} ' + widget.textCount,
-              style: TextStyle(
-                fontFamily: 'SF Pro Display',
-                fontSize: ResponsiveFlutter.of(context).fontSize(2), //16.0,
-                color: const Color(0xFFFD4F6A),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(),
-          child: RangeSlider(
-            activeColor: Color(0xffEA425C),
-            inactiveColor: Color(0xffE6E6E6),
-            values: _currentRangeValues,
-            min: widget.min,
-            max: widget.max,
-            labels: RangeLabels(
-              _currentRangeValues.start.round().toString(),
-              _currentRangeValues.end.round().toString(),
-            ),
-            onChanged: (RangeValues values) {
-              setState(() {
-                _currentRangeValues = values;
-                if (widget.chooceTypeText == 0) {
-                  start = int.parse(values.start.round().toStringAsFixed(0));
-                  end = int.parse(values.end.round().toStringAsFixed(0));
-                } else {
-                  // start = values.start.round();
-                  // end = values.end.round();
-                  start = double.parse((values.start).toStringAsFixed(1));
-                  end = double.parse((values.end).toStringAsFixed(1));
-                }
-              });
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class EventsItem extends StatelessWidget {
   EventsItem(
     this.img,
@@ -271,6 +96,7 @@ class EventsItem extends StatelessWidget {
   String desc;
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<MyModel>(context);
     return Container(
       margin: EdgeInsets.only(
         top: getProportionateScreenHeight(16),
@@ -354,6 +180,8 @@ class EventsItem extends StatelessWidget {
                     elevation: 0,
                     onPressed: () {
                       print('!!!Подробнее!!!');
+                      model.selectedIndex = 0;
+                      model.numBar = 3;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -399,6 +227,7 @@ class EventsItem extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 //Button next
                 Container(
                   width: getProportionateScreenWidth(311),

@@ -21,7 +21,7 @@ class PinEntryTextField extends StatefulWidget {
 
   PinEntryTextField({
     this.lastPin,
-    this.fields: 4,
+    this.fields: 6,
     this.onSubmit,
     this.fieldWidth: 40.0,
     this.fieldHeight: 40.0,

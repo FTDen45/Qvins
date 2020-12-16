@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:qvins/MyModel.dart';
 
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
@@ -11,6 +13,7 @@ class widgetMainScreen extends StatelessWidget {
   final Function BottomSheet;
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<MyModel>(context);
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -64,6 +67,9 @@ class widgetMainScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         print('ditailes people!!!');
+
+                        model.selectedIndex = 2;
+                        model.numBar = 2;
                         Navigator.push(
                             context,
                             MaterialPageRoute(

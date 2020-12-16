@@ -6,6 +6,9 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:qvins/size_cofige.dart';
 import 'package:qvins/screens/myscreen/review_add_screen.dart';
 
+import 'package:provider/provider.dart';
+import 'package:qvins/MyModel.dart';
+
 import 'package:qvins/widgets/widgetProfileUserEdit.dart';
 import 'package:qvins/screens/main/main_screen.dart';
 
@@ -18,10 +21,11 @@ class reviewsShowBottomSheet extends StatelessWidget {
   Function showBottom;
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<MyModel>(context);
     return Container(
       width: getProportionateScreenWidth(375),
       height: user
-          ? getProportionateScreenHeight(340)
+          ? getProportionateScreenHeight(360)
           : getProportionateScreenHeight(692),
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(15),
@@ -73,6 +77,8 @@ class reviewsShowBottomSheet extends StatelessWidget {
                     if (user) {
                       showBottom(context);
                     } else {
+                      model.selectedIndex = 4;
+                      model.numBar = 6;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
